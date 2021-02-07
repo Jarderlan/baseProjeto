@@ -1,13 +1,14 @@
 import React, { Fragment, useState } from 'react'
 import { Button, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
+import api from '../services/api';
 
 const Formulario = ({ isOpen, setIsOpen }) => {
 
     const [meuForm, setMeuForm] = useState({
         nome: '',
         email: '',
-        fone: '',
-        end: ''
+        telefone: '',
+        endereco: ''
     });
 
     const funcaoQueMuda = (event) => {
@@ -20,8 +21,9 @@ const Formulario = ({ isOpen, setIsOpen }) => {
         })
     }
 
-    const onSubmit = () => {
+    const onSubmit = async () => {
         console.log(meuForm)
+        api.post('/clientes', meuForm)
     }
     return (
 
@@ -36,10 +38,10 @@ const Formulario = ({ isOpen, setIsOpen }) => {
                 <Input type='text' name={'email'} onChange={funcaoQueMuda} value={meuForm.email} />
 
                 <Label>Fone</Label>
-                <Input type='text' name={'fone'} onChange={funcaoQueMuda} value={meuForm.fone} />
+                <Input type='text' name={'telefone'} onChange={funcaoQueMuda} value={meuForm.telefone} />
 
-                <Label>Endereco</Label>
-                <Input type='text' name={'end'} onChange={funcaoQueMuda} value={meuForm.end} />
+                <Label>Endereço</Label>
+                <Input type='text' name={'endereco'} onChange={funcaoQueMuda} value={meuForm.endereco} />
             </ModalBody>
             <ModalFooter>
                 <Button color="primary" onClick={onSubmit}>Do Something</Button>{' '}
